@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+       {% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Filtro</title>
+    <link rel="stylesheet" type="text/css" href="{%static 'style.css'%}">
+
+
+
+</head>
+<body>
+<div>TOTAL : {{no_personas}}</div>
+
+
+</div>
+
+<div ><a  class="agregar_clientes" href="nuevapersona">AGREGAR CLIENTES</a></div>
+<div>
+
+
+<div class = "contenedor_input_clientes">
+    <form method="POST" class="forma_clientes"  >
+        {% csrf_token %}
+    <input class = "buscador_clientes" name = "buscar" placeholder="Buscar..."   value = "{{request.POST.buscar}}">
+
+
+
+  <div class="contenedor_boton">  <button type="submit" class="boton_buscador_clientes">Filtrar</button> </div>
+
+        </form>
+
+    </div>
+
+
+ <div class = "contenedor_tabla_clientes">
+    <table border="1" class = "tabla_clientes">
+        <thead class = "thead_clientes">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Numero</th>
+            <th>Domicilio</th>
+            <th>Ciudad</th>
+            <th>Dia</th>
+            <th>Deuda</th>
+            <th>Total</th>
+            <th>Ver detalle</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+
+
+
+
+
+        </tr>
+
+
+        </thead>
+        <tbody class="tbody_clientes">
+        {%for persona in personas%}
+        <tr>
+            <th class="th_tbody"> {{persona.id}}</th>
+            <th class="th_tbody"> {{persona.nombre}} {{persona.apellido}}</th>
+            <th class="th_tbody"> {{persona.email}}</th>
+            <th class="th_tbody">{{persona.numero}}</th>
+            <th class="th_tbody">{{persona.calle}} {{persona.no_domicilio}}</th>
+            <th class="th_tbody">{{persona.ciudad}}</th>
+             <th class="th_tbody">{{persona.dia}}</th>
+            <th class="th_tbody">{{persona.deuda}}</th>
+            <th class="th_tbody">{{persona.total}}</th>
+
+            <th class="th_tbody"><a class="href_clientes" href="detalle_persona/{{persona.id}}">Ver detalle</a></th>
+            <th class="th_tbody"><a class="href_clientes" href="editarpersona/{{persona.id}}">Editar</a></th>
+            <th class="th_tbody"><a class="href_clientes" href="eliminar/{{persona.id}}">Eliminar</a></th>
+
+        </tr>
+
+        {%endfor%}
+
+        </tbody>
+
+
+    </table>
+
+
+</div>
+
+
+
+
+
+
+
+
+</body>
+</html>
